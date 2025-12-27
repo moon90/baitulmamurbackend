@@ -1,5 +1,7 @@
 // server.js
-require('dotenv').config();
+if (!process.env.DATABASE_URL) {
+  require('dotenv').config();
+}
 const express = require('express');
 const cors = require('cors');
 const db = require('./config/db'); // Import the db connection

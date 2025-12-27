@@ -1,9 +1,15 @@
 // config/db.js
 const { Pool } = require('pg');
 
-const poolConfig = process.env.DATABASE_URL
+const rawDatabaseUrl = process.env.DATABASE_URL;
+let normalizedDatabaseUrl = rawDatabaseUrl;
+if (normalizedDatabaseUrl && normalizedDatabaseUrl.startsWith('jdbc:')) {
+  normalizedDatabaseUrl = normalizedDatabaseUrl.replace(/^jdbc:/, '');
+}
+
+const poolConfig = normalizedDatabaseUrl
   ? {
-      connectionString: process.env.DATABASE_URL,
+      connectionString: normalizedDatabaseUrl,
       ssl: { rejectUnauthorized: false },
     }
   : {
