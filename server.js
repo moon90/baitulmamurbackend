@@ -40,6 +40,7 @@ app.use('/api/translations', require('./routes/translations'));
 app.use('/api/users', optionalAuth, require('./routes/users'));
 app.use('/api/media', require('./routes/media'));
 app.use('/api/live-stream', require('./routes/liveStream'));
+app.use('/api/jamaat-schedules', require('./routes/jamaatSchedules'));
 
 // Start the server only if this file is run directly (not imported for testing)
 if (require.main === module) {

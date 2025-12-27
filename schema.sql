@@ -116,3 +116,19 @@ CREATE TABLE translations (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (key, language_code)
 );
+
+-- Jamaat Schedules Table
+CREATE TABLE jamaat_schedules (
+    id BIGSERIAL PRIMARY KEY,
+    location TEXT NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    fajr TIME NULL,
+    dhuhr TIME NULL,
+    asr TIME NULL,
+    isha TIME NULL,
+    maghrib_offset_minutes INT NOT NULL DEFAULT 7,
+    source TEXT,
+    CONSTRAINT uq_jamaat UNIQUE (location, start_date, end_date),
+    CONSTRAINT chk_date_range CHECK (start_date <= end_date)
+);
